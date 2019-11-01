@@ -11,8 +11,10 @@ services:
     ports:
       - "26379:26379"
     volumes:
-      - ./sentinel/sentinel1.conf:/etc/sentinel.conf
-    command: redis-server /etc/sentinel.conf --sentinel
+      - ./sentinel/sentinel1.conf:/etc/sentinel1.conf
+    command: redis-server /etc/sentinel1.conf --sentinel
+#      - chown root:root /etc/sentinel1.conf
+#      - redis-server /etc/sentinel1.conf --sentinel
 
   redis2:
     image: redis:4-alpine
@@ -24,9 +26,8 @@ services:
     ports:
       - "26380:26379"
     volumes:
-      - ./sentinel/sentinel2.conf:/etc/sentine2.conf
-    command: redis-server /etc/sentine2.conf --sentinel
-
+      - ./sentinel/sentinel2.conf:/etc/sentinel2.conf
+    command: redis-server /etc/sentinel2.conf --sentinel
 
   redis3:
     image: redis:4-alpine
@@ -38,5 +39,9 @@ services:
     ports:
       - "26381:26379"
     volumes:
-      - ./sentinel/sentinel3.conf:/etc/sentine3.conf
-    command: redis-server /etc/sentine3.conf --sentinel
+      - ./sentinel/sentinel3.conf:/etc/sentinel3.conf
+    command: redis-server /etc/sentinel3.conf --sentinel
+
+volumes:
+  data-volume:
+
