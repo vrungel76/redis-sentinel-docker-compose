@@ -2,44 +2,36 @@ version: '3.7'
 
 services:
   redis1:
+    hostname: redis1
     image: redis:4-alpine
-    ports:
-      - "6379:6379"
 
   sentinel1:
+    hostname: sentinel1
     image: redis:4-alpine
-    ports:
-      - "26379:26379"
     volumes:
-      - ./sentinel/sentinel1.conf:/etc/sentinel1.conf
+      - ./docker/dev/sentinel/sentinel1.conf:/etc/sentinel1.conf
     command: redis-server /etc/sentinel1.conf --sentinel
-#      - chown root:root /etc/sentinel1.conf
-#      - redis-server /etc/sentinel1.conf --sentinel
 
   redis2:
+    hostname: redis2
     image: redis:4-alpine
-    ports:
-      - "6380:6379"
 
   sentinel2:
+    hostname: sentinel2
     image: redis:4-alpine
-    ports:
-      - "26380:26379"
     volumes:
-      - ./sentinel/sentinel2.conf:/etc/sentinel2.conf
+      - ./docker/dev/sentinel/sentinel2.conf:/etc/sentinel2.conf
     command: redis-server /etc/sentinel2.conf --sentinel
 
   redis3:
+    hostname: redis3
     image: redis:4-alpine
-    ports:
-      - "6381:6379"
 
   sentinel3:
+    hostname: sentinel3
     image: redis:4-alpine
-    ports:
-      - "26381:26379"
     volumes:
-      - ./sentinel/sentinel3.conf:/etc/sentinel3.conf
+      - ./docker/dev/sentinel/sentinel3.conf:/etc/sentinel3.conf
     command: redis-server /etc/sentinel3.conf --sentinel
 
 volumes:
